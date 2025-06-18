@@ -8,6 +8,7 @@
       rel="stylesheet"
     />
     <script src="index.js" type="module"></script>
+    <script src="ui.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Font style sheet below -->
     <style type="text/tailwindcss">
@@ -67,28 +68,34 @@
     <title>Home Page</title>
   </head>
   <body>
-    <header>
-      <nav class="bg-white shadow-md sticky">
-        <div
-          class="container mx-auto px-4 py-4 flex items-center justify-between"
-        >
-          <a href="index.html" class="flex items-center space-x-2">
-            <img
-              src="assets/Logo.png"
-              alt="Logo"
-              class="w-16 h-16 transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
-            />
-          </a>
+    <header
+      id="navbar"
+      class="fixed w-full top-[1.5rem] px-[1.5rem] mx-[1.5rem] z-50 bg-white/20 backdrop-blur-md border rounded-full border-white/20"
+    >
+      <div
+        class="w-full mx-auto flex justify-between items-center px-4 py-4 text-white"
+      >
+        <a href="index.html" class="flex items-center space-x-2">
+          <img
+            src="assets/Logo.png"
+            alt="Logo"
+            class="w-[3rem] h-[3rem] transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
+          />
+        </a>
 
-          <!-- Desktop Menu -->
-          <ul class="flex space-x-8" id="nav-links">
-            <li><a href="index.html" class="hover:underline">Home Page</a></li>
-            <li>
-              <a href="journal.html" class="hover:underline">Journal Page</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+        <ul class="flex space-x-8" id="nav-links">
+          <li>
+            <a href="index.html" class="text-white hover:underline"
+              >Home Page</a
+            >
+          </li>
+          <li>
+            <a href="journal.html" class="text-white hover:underline"
+              >Journal Page</a
+            >
+          </li>
+        </ul>
+      </div>
     </header>
 
     <div id="hero" class="relative h-screen overflow-hidden">
