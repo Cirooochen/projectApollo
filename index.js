@@ -31,11 +31,11 @@ const movieInfo = movieData.results;
 console.log(movieInfo);
 
 const movieContainer = document.querySelector("#movieContainer");
-
 movieInfo.forEach((movie) => {
   const movieCard = document.createElement("div");
   movieCard.className =
     "p-4 min-w-[25rem] md:w-1/3 snap-center gap-[2rem] border border-red-50 "; //  here add some styling and shit
+  movieCard.classList.add("movie-card"); //classname for each movie card
 
   const movieImag = document.createElement("img");
   movieImag.src = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
@@ -57,9 +57,45 @@ movieInfo.forEach((movie) => {
     "border text-black py-2 px-8 rounded-full hover:bg-gray-200";
   favBtn.textContent = "Add to my journal";
 
+  favBtn.classList.add("AddToJournal");
+  favBtn.dataset.id = movie.id; //Attention!!! When you assign the movie.id to button's dataset-id, the data type changes from Number to String
+
   movieCard.appendChild(imgDiv);
   movieCard.appendChild(movieTitle);
   movieCard.appendChild(movieDescription);
   movieCard.appendChild(favBtn);
   movieContainer.appendChild(movieCard);
+});
+
+//Click event listener
+movieContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("AddToJournal")) {
+    const clickedCard = event.target.closest(".movie-card");
+    const id = event.target.dataset.id;
+
+    //Read current favorites from localStorage
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const alreadyAddedIndex = favorites.findIndex((movie) => movie.id === id);
+    console.log(favorites);
+    console.log(alreadyAddedIndex);
+
+    //This part check if the movie is already added into the index
+    if (alreadyAddedIndex === -1) {
+      const favoriteMovie = {
+        id: id,
+        title: clickedCard.querySelector("h5").textContent,
+        overview: clickedCard.querySelector("p").textContent,
+        poster_path: clickedCard.querySelector("img").src,
+      };
+
+      favorites.push(favoriteMovie);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      event.target.textContent = "✅ Added";
+    } else {
+      // Already added → Remove from favorites
+      favorites.splice(alreadyAddedIndex, 1); // remove the movie
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      event.target.textContent = "Add to my journal";
+    }
+  }
 });
