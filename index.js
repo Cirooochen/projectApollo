@@ -107,17 +107,24 @@ const searchModal = document.getElementById("searchModal");
 const closeModalBtn = document.getElementById("closeModal");
 const modalContent = document.getElementById("modalContent");
 
-async function searchMovie(query) {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-    query
-  )}&include_adult=false&language=en-US&page=1`;
-  try {
-    const res = await fetch(url, options);
-    if (!res.ok) throw new Error("API error");
-    return await res.json();
-  } catch (err) {
-    return { error: "Failed to fetch search results." };
-  }
+// async function searchMovie(query) {
+//   const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+//     query
+//   )}&include_adult=false&language=en-US&page=1`;
+//   try {
+//     const res = await fetch(url, options);
+//     if (!res.ok) throw new Error("API error");
+//     return await res.json();
+//   } catch (err) {
+//     return { error: "Failed to fetch search results." };
+//   }
+// }   this is for whole website searching
+
+function searchMovie(query) {
+  const results = movieInfo.filter((movie) =>
+    movie.title.toLowerCase().includes(query.toLowerCase())
+  );
+  return { results }; // this is for the local 20 films searching
 }
 
 searchForm.addEventListener("submit", async (e) => {
@@ -129,7 +136,8 @@ searchForm.addEventListener("submit", async (e) => {
   }
   modalContent.innerHTML = `<div class="text-gray-500 animate-pulse">Searching...</div>`;
   showModal();
-  const data = await searchMovie(query);
+  // const data = await searchMovie(query);
+  const data = searchMovie(query);
 
   if (data.error || !data.results || data.results.length === 0) {
     modalContent.innerHTML = `<div class="text-gray-500">No results found.</div>`;
