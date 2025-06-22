@@ -126,12 +126,47 @@
           Don' know what to watch? Add your favorite movies and add note to it.
         </p>
         <!-- Jialiang's Search Function Part : The input field for user's input(Movie name, etc), and a Search button to trigger result dialog-->
-        <input type="text" class="bg-white/30 py-3 px-6 rounded-md mb-6" />
+        <!-- <input type="text" class="bg-white/30 py-3 px-6 rounded-md mb-6" />
         <button
           class="bg-white/30 hover:bg-white/70 text-white font-semibold py-3 px-6 rounded-4xl backdrop-blur-md transition duration-300"
         >
           Search
+        </button> -->
+        <form
+          id="searchForm"
+          class="flex flex-col items-center w-full max-w-lg"
+        >
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search for a movie..."
+            class="bg-white/30 py-3 px-6 rounded-md mb-6 w-full text-black placeholder:text-gray-400"
+          />
+          <button
+            type="submit"
+            id="searchBtn"
+            class="bg-white/30 hover:bg-white/70 text-white font-semibold py-3 px-6 rounded-4xl backdrop-blur-md transition duration-300"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Jia: Modal/Dialog for Search Results -->
+    <div
+      id="searchModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden"
+    >
+      <div class="bg-white rounded-xl shadow-lg p-8 max-w-lg w-full relative">
+        <button
+          id="closeModal"
+          class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-2xl"
+          title="Close"
+        >
+          &times;
         </button>
+        <div id="modalContent"></div>
       </div>
     </div>
     <!-- Ciro's Movie Fetch Part -->
