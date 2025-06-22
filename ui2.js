@@ -19,11 +19,14 @@ export function renderMovies(container) {
       "bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-2xl p-6 shadow-xl transition hover:scale-105 w-full";
 
     const imageUrl = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+      ? `<img src="${movie.poster_path}" alt="${movie.title}" class="rounded mb-2 shadow-lg" />`
       : "assets/cinema.jpg";
 
     card.innerHTML = `
-  <div class="flex flex-col h-full justify-between">
+     <div class="flex flex-col h-full justify-between">
+    <!-- Poster -->
+    ${imageUrl}
+
     <!-- Top Icon -->
     <div class="text-5xl text-white mb-4">🎬</div>
 
