@@ -99,3 +99,86 @@ movieContainer.addEventListener("click", (event) => {
     }
   }
 });
+// --- Jia: Search & Dialog Feature Start ---
+
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
+const searchModal = document.getElementById("searchModal");
+const closeModalBtn = document.getElementById("closeModal");
+const modalContent = document.getElementById("modalContent");
+
+// async function searchMovie(query) {
+//   const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+//     query
+//   )}&include_adult=false&language=en-US&page=1`;
+//   try {
+//     const res = await fetch(url, options);
+//     if (!res.ok) throw new Error("API error");
+//     return await res.json();
+//   } catch (err) {
+//     return { error: "Failed to fetch search results." };
+//   }
+// }   this is for whole website searching
+
+function searchMovie(query) {
+  const results = movieInfo.filter((movie) =>
+    movie.title.toLowerCase().includes(query.toLowerCase())
+  );
+  return { results }; // this is for the local 20 films searching
+}
+
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const query = searchInput.value.trim();
+  if (!query) {
+    showModal(`<div class="text-red-500">Please enter a movie name.</div>`);
+    return;
+  }
+  modalContent.innerHTML = `<div class="text-gray-500 animate-pulse">Searching...</div>`;
+  showModal();
+  // const data = await searchMovie(query);
+  const data = searchMovie(query);
+
+  if (data.error || !data.results || data.results.length === 0) {
+    modalContent.innerHTML = `<div class="text-gray-500">No results found.</div>`;
+    return;
+  }
+  modalContent.innerHTML = `
+    <h3 class="font-bold text-lg mb-4 text-black">Search Results:</h3>
+    <ul class="space-y-4">
+      ${data.results
+        .slice(0, 5)
+        .map(
+          (movie) => `
+        <li class="flex space-x-4 items-center">
+          <img src="https://image.tmdb.org/t/p/w92${movie.poster_path}" alt="${
+            movie.title
+          }" class="w-16 h-24 rounded object-cover bg-gray-200"/>
+          <div>
+            <div class="font-semibold text-black">${movie.title}</div>
+            <div class="text-xs text-gray-500">${
+              movie.release_date || "Unknown"
+            }</div>
+            <div class="line-clamp-2 text-gray-700 text-xs">${
+              movie.overview || ""
+            }</div>
+          </div>
+        </li>
+      `
+        )
+        .join("")}
+    </ul>
+  `;
+});
+
+function showModal(html) {
+  if (html) modalContent.innerHTML = html;
+  searchModal.classList.remove("hidden");
+}
+closeModalBtn.addEventListener("click", () =>
+  searchModal.classList.add("hidden")
+);
+
+searchModal.addEventListener("click", (e) => {
+  if (e.target === searchModal) searchModal.classList.add("hidden");
+});
