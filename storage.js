@@ -1,11 +1,11 @@
 export function getSavedMovies() {
-  return JSON.parse(localStorage.getItem("savedMovies")) || [];
+  return JSON.parse(localStorage.getItem("favorites")) || [];
 }
 
 export function saveMovies(movies) {
-  localStorage.setItem("savedMovies", JSON.stringify(movies));
+  localStorage.setItem("favorites", JSON.stringify(movies));
 }
 
 export function deleteAllMovies() {
-  localStorage.removeItem("savedMovies");
+  localStorage.removeItem("favorites");
 }

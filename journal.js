@@ -3,18 +3,6 @@
 import { renderMovies } from "./ui2.js";
 import { deleteAllMovies } from "./storage.js";
 
-localStorage.setItem(
-  "savedMovies",
-  JSON.stringify([
-    {
-      id: 1,
-      title: "Mahabharat: The Eternal War",
-      overview: "An epic tale of Dharma vs Adharma.",
-      poster_path: "/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg",
-    },
-  ])
-);
-
 document.addEventListener("DOMContentLoaded", () => {
   const movieCardContainer = document.getElementById("movieCard");
   const deleteAllBtn = document.getElementById("delete-all-btn");
