@@ -7,7 +7,6 @@
       href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
     <script src="index.js" type="module"></script>
     <script src="ui.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -89,13 +88,6 @@
         <div class="text-xl font-bold tracking-wide text-white">
           Project Apollo
         </div>
-        <!-- <a href="index.html" class="flex items-center space-x-2">
-          <img
-            src="assets/Logo.png"
-            alt="Logo"
-            class="w-[3rem] h-[3rem] transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
-          />
-        </a> -->
 
         <ul class="flex space-x-6 text-white/90 font-medium" id="nav-links">
           <li>
@@ -117,22 +109,21 @@
     </header>
 
     <div id="hero" class="relative h-screen overflow-hidden">
-      <!-- Background image -->
-      <img
-        src="assets/bgImg.png"
-        alt="Hero Image"
-        class="absolute w-full h-full object-cover z-0"
-      />
+      <!-- Background content -->
+
+      <video autoplay loop class="absolute w-full h-full object-cover z-0">
+        <source src="assets/bgVideo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <!-- Overlay for Readability -->
-      <div class="absolute bg-black/50 z-10"></div>
+      <div class="absolute bg-black/40 z-10"></div>
       <!-- Hero Content -->
       <div
         class="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-4"
       >
         <h1 class="font-bold mb-6">Create your own movie diary</h1>
         <p class="px-24 mb-10">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur
-          nihil, quae eveniet odio iure optio!
+          Don' know what to watch? Add your favorite movies and add note to it.
         </p>
         <!-- Jialiang's Search Function Part : The input field for user's input(Movie name, etc), and a Search button to trigger result dialog-->
         <input type="text" class="bg-white/30 py-3 px-6 rounded-md mb-6" />
