@@ -6,10 +6,10 @@ export function renderMovies(container) {
 
   if (savedMovies.length === 0) {
     container.innerHTML = `
-    <div class="text-center py-10 text-white/80 text-lg italic tracking-wide">
-      You haven’t saved any movies yet. Add some from the homepage 🎬
-    </div>
-  `;
+      <div class="text-center py-10 text-white/80 text-lg italic tracking-wide">
+        You haven’t saved any movies yet. Add some from the homepage 🎬
+      </div>
+    `;
     return;
   }
 
@@ -18,49 +18,55 @@ export function renderMovies(container) {
     card.className =
       "bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-2xl p-6 shadow-xl transition hover:scale-105 w-full";
 
-    const imageUrl = movie.poster_path
-      ? `<img src="${movie.poster_path}" alt="${movie.title}" class="rounded mb-2 shadow-lg" />`
-      : "assets/cinema.jpg";
+    const imageHtml = movie.poster_path
+      ? `<img src="${movie.poster_path}" alt="${movie.title}" class="rounded mb-4 shadow-lg w-full max-h-72 object-cover" />`
+      : "";
 
     card.innerHTML = `
-     <div class="flex flex-col h-full justify-between">
-    <!-- Poster -->
-    ${imageUrl}
+      <div class="flex flex-col h-full justify-between">
+        ${imageHtml}
 
-    <!-- Top Icon -->
-    <div class="text-5xl text-white mb-4">🎬</div>
+        <!-- Icon -->
+        <div class="text-5xl text-white mb-4">🎬</div>
 
-    <!-- Title & Description -->
-    <h2 class="text-2xl font-bold text-white mb-2">${movie.title}</h2>
-    <p class="text-sm italic text-gray-300 mb-4">${
-      movie.overview || "No description available."
-    }</p>
+        <!-- Title & Description -->
+        <h2 class="text-2xl font-bold text-white mb-2">${movie.title}</h2>
+        <p class="text-sm italic text-gray-300 mb-4">
+          ${movie.overview || "No description available."}
+        </p>
 
-    <!-- Buttons -->
-    <div class="mt-auto">
-      <div class="flex justify-between mb-2">
+        <!-- Note Display (if any) -->
+        <div class="movie-note-block mt-2">
+          ${
+            movie.note
+              ? `<p class="note-display italic text-md text-yellow-300 bg-white/10 px-4 py-3 rounded mb-4 shadow transition-all duration-300">
+                  📝 ${movie.note}
+                </p>`
+              : ""
+          }
+
+          <!-- Input + Save -->
+          <input 
+            type="text" 
+            class="note-input w-full p-2 mb-2 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400" 
+            placeholder="Add a personal note..." 
+            value=""
+          />
+          <button 
+            class="save-note-btn bg-blue-500 hover:bg-blue-600 w-full text-white py-2 rounded-full text-sm" 
+            data-index="${index}">
+            💾 Save Note
+          </button>
+        </div>
+
+        <!-- Remove Button -->
         <button 
-          class="remove-btn bg-red-500 hover:bg-red-700 text-white px-4 py-1 rounded-full text-sm shadow" 
+          class="remove-btn mt-4 bg-red-500 hover:bg-red-700 text-white px-4 py-1 rounded-full text-sm shadow" 
           data-index="${index}">
           🗑 Remove
         </button>
       </div>
-
-      <!-- Notes -->
-      <input 
-        type="text" 
-        class="note-input w-full p-2 mb-2 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400" 
-        placeholder="Add a personal note..." 
-        value="${movie.note || ""}"
-      />
-      <button 
-        class="save-note-btn bg-blue-500 hover:bg-blue-600 w-full text-white py-2 rounded-full text-sm" 
-        data-index="${index}">
-        💾 Save Note
-      </button>
-    </div>
-  </div>
-`;
+    `;
 
     container.appendChild(card);
   });
@@ -88,9 +94,23 @@ export function renderMovies(container) {
         updated[index].note = note;
         saveMovies(updated);
 
+        // ✅ Update UI immediately
+        const noteBlock = btn.closest(".movie-note-block");
+        const oldNoteDisplay = noteBlock.querySelector(".note-display");
+
+        if (oldNoteDisplay) {
+          oldNoteDisplay.textContent = `📝 ${note}`;
+        } else {
+          const noteDisplay = document.createElement("p");
+          noteDisplay.className =
+            "note-display italic text-md text-yellow-300 bg-white/10 px-4 py-3 rounded mb-4 shadow transition-all duration-300";
+          noteDisplay.textContent = `📝 ${note}`;
+          input.parentElement.insertBefore(noteDisplay, input);
+        }
+
         // Visual feedback
         btn.textContent = "✅ Saved!";
-        input.value = ""; // 💡 Clear input after saving
+        input.value = "";
 
         setTimeout(() => {
           btn.textContent = "💾 Save Note";

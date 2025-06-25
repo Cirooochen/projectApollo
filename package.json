@@ -1,0 +1,20 @@
+{
+  "name": "movies-api",
+  "source": "index.html",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
+    "tailwindcss": "^4.1.10"
+  }
+}
