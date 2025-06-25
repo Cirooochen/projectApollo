@@ -2,6 +2,7 @@
 
 import { renderMovies } from "./ui2.js";
 import { deleteAllMovies } from "./storage.js";
+import { navBarScrollEffect } from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const movieCardContainer = document.getElementById("movieCard");

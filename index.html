@@ -7,8 +7,8 @@
       href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
-    <script src="index.js" type="module"></script>
-    <script src="ui.js" defer></script>
+    <script src="index.js" type="module" defer></script>
+    <script src="ui.js" type="module" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Hide scrollbar -->
     <style>
@@ -85,8 +85,12 @@
       <div
         class="max-w-7xl mx-[1rem] md:mx-auto px-6 py-4 flex items-center justify-between backdrop-blur-md bg-white/20 border rounded-full border-white/20"
       >
-        <div class="text-xl font-bold tracking-wide text-white">
-          Project Apollo
+        <div>
+          <a
+            class="text-xl font-bold tracking-wide text-white"
+            href="index.html"
+            >Project Apollo</a
+          >
         </div>
 
         <ul class="flex space-x-6 text-white/90 font-medium" id="nav-links">
@@ -189,6 +193,11 @@
         >
           <!-- here goes the movie list -->
         </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center">
+        <a href="journal.html" class="text-xl hover:underline transition"
+          >Go to my journal</a
+        >
       </div>
     </section>
 

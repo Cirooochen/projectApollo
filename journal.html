@@ -38,27 +38,30 @@
     </div>
 
     <!-- Navbar -->
-    <header
-      class="fixed w-full top-[1.5rem] px-[1.5rem] mx-[1.5rem] z-50 bg-white/20 backdrop-blur-md border rounded-full border-white/20"
-    >
+    <header id="navbar" class="fixed top-[1.25rem] left-0 w-full z-50">
       <div
-        class="w-full mx-auto flex justify-between items-center px-4 py-4 text-white"
+        class="max-w-7xl mx-[1rem] md:mx-auto px-6 py-4 flex items-center justify-between backdrop-blur-md bg-white/20 border rounded-full border-white/20"
       >
-        <a href="index.html" class="flex items-center space-x-2">
-          <img
-            src="assets/Logo.png"
-            alt="Logo"
-            class="w-[3rem] h-[3rem] transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
-          />
-        </a>
-        <ul class="flex space-x-8">
+        <div>
+          <a
+            class="text-xl font-bold tracking-wide text-white"
+            href="index.html"
+            >Project Apollo</a
+          >
+        </div>
+
+        <ul class="flex space-x-6 text-white/90 font-medium" id="nav-links">
           <li>
-            <a href="index.html" class="text-white hover:underline"
+            <a
+              href="index.html"
+              class="hover:text-white hover:underline transition"
               >Home Page</a
             >
           </li>
           <li>
-            <a href="journal.html" class="text-white hover:underline"
+            <a
+              href="journal.html"
+              class="hover:text-white hover:underline transition"
               >Journal Page</a
             >
           </li>

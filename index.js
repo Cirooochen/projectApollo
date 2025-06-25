@@ -67,6 +67,26 @@ movieInfo.forEach((movie) => {
   movieContainer.appendChild(movieCard);
 });
 
+//Window event listener, this is for checking the localStorage movies evry time when the page refresh and showing different button labels on the movie cards accordingly.
+window.addEventListener("load", () => {
+  //Read current favorites from localStorage
+  const favorites = JSON.parse(localStorage.getItem("favorites"));
+  const allButtons = document.querySelectorAll(".AddToJournal");
+  console.log(favorites);
+  // console.log(movieInfo);
+  // console.log(allButtons);
+  allButtons.forEach((btn) => {
+    const btnId = btn.dataset.id;
+    const isFavorite = favorites.some((movie) => movie.id === btnId); //returns true or false
+    console.log(isFavorite);
+    if (isFavorite) {
+      btn.textContent = "✅ Added";
+    } else {
+      btn.textContent = "Add to my journal";
+    }
+  });
+});
+
 //Click event listener
 movieContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("AddToJournal")) {
@@ -79,7 +99,7 @@ movieContainer.addEventListener("click", (event) => {
     console.log(favorites);
     console.log(alreadyAddedIndex);
 
-    //This part check if the movie is already added into the index
+    //This part check if the movie is already added into the localStorage
     if (alreadyAddedIndex === -1) {
       const favoriteMovie = {
         id: id,
